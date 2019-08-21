@@ -1,0 +1,27 @@
+buildscript {
+
+    ext {
+        kotlinVersion = '1.3.41'
+    }
+}
+    plugins {
+        id 'idea'
+        id 'org.jetbrains.kotlin.jvm' version '1.3.41'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    }
+    compileKotlin {
+        kotlinOptions {
+            jvmTarget = "11"
+        }
+    }
+    compileTestKotlin {
+        kotlinOptions {
+            jvmTarget = "11"
+        }
+    }
