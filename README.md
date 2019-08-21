@@ -1,1 +1,21 @@
-# inntektsmelding-kontrakt
+Inntektsmelding Kontrakt
+================
+
+Intern kontrakt for inntektsmelding internt i sykepenger
+
+# Komme i gang
+
+Prosjektet tas inn som en dependency for de som skal produsere/konsumere disse objektene
+
+---
+
+# Henvendelser
+
+Spørsmål knyttet til koden eller prosjektet kan rettes mot:
+
+* Morten Laukvik, morten.laukvik@nav.no
+* Aleksander Andresen, aleksander.andresen@nav.no
+
+## For NAV-ansatte
+
+Interne henvendelser kan sendes via Slack i kanalen #team-arbeidsgiver
