@@ -1,14 +1,18 @@
 package no.nav.inntektsmeldingkontrakt
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDate
 
 data class Inntektsmelding(
 
         /** Arbeidstakers fødselsnummer/dnr  */
+        @JsonFormat(pattern = "[0-9]{11}")
         val arbeidstakerFnr: String,
         /** Virksomhetsnummer for den virksomheten arbeidstaker er knyttet til (har arbeidsforhold hos)  */
+        @JsonFormat(pattern = "[0-9]{9}")
         val virksomhetsnummer: String,
         /** Arbeidsgivers fødselsnummer/dnr */
+        @JsonFormat(pattern = "[0-9]{11}")
         val arbeidsgiverFnr: String?,
         /** ArbeidsforholdId skal oppgis når en arbeidstaker har flere arbeidsforhold hos den samme virksomheten slik at det
          * må sendes inn flere inntektsmeldinger for en arbeidstaker Det skal benyttes samme arbeidsforholdId som sendes inn
@@ -26,6 +30,7 @@ data class Inntektsmelding(
          * Feltet skal være obligatorisk ved fravær. Dersom man angir «Beløpet er satt til 0,- da det ikke er fravær i dette
          * arbeidsforholdet» under begrunnelseForReduksjonEllerIkkeUtbetalt, skal  det ikke angis dato.
          */
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
         val foersteFravaersdag: LocalDate?,
         /** Oppgi inntekt som samsvarer med folketrygdloven § 8-28. Oppgis som månedsbeløp. Beløp med to desimaler.
          * Det skal alltid opplyses full lønn.  */

@@ -12,8 +12,8 @@ dateFormat.timeZone = TimeZone.getTimeZone(ZoneId.of("Europe/Oslo"))
 val gitHash = System.getenv("CIRCLE_SHA1") ?: "local-build"
 val javaTimeAdapterVersion = "1.1.3"
 
-group = "no.nav.sykepenger.kontrakter"
-version = "${dateFormat.format(Date())}-$gitHash"
+val group = "no.nav.sykepenger.kontrakter"
+val version = "${dateFormat.format(Date())}-$gitHash"
 
 plugins {
     kotlin("jvm") version "1.3.41"
@@ -23,9 +23,14 @@ plugins {
     id("de.marcphilipp.nexus-publish") version "0.2.0"
 }
 
+val jacksonVersion = "2.9.9"
+
 dependencies {
     implementation(kotlin("stdlib"))
     implementation("com.migesok", "jaxb-java-time-adapters", javaTimeAdapterVersion)
+    implementation("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
+    testImplementation("junit:junit:4.12")
 }
 
 repositories {
@@ -138,6 +143,12 @@ version=${project.version}
             from(generatePomFileForMavenJavaPublication) {
                 rename(".+", "pom.xml")
             }
+        }
+    }
+    test {
+        useJUnit()
+        filter {
+            includeTestsMatching("*Test")
         }
     }
 }

@@ -1,5 +1,6 @@
 package no.nav.inntektsmeldingkontrakt
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDate
 
 data class Refusjon (
@@ -11,5 +12,6 @@ data class Refusjon (
     val beloepPrMnd: Float? = null,
 
     /** Dersom refusjonen opphører i stønadsperioden angis siste dag det søkes om refusjon for.  */
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     val opphoersdato: LocalDate? = null
 )
