@@ -30,7 +30,8 @@ dependencies {
     implementation("com.migesok", "jaxb-java-time-adapters", javaTimeAdapterVersion)
     implementation("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
     implementation("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
-    testImplementation("junit:junit:4.12")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.3.1")
 }
 
 repositories {
@@ -146,7 +147,7 @@ version=${project.version}
         }
     }
     test {
-        useJUnit()
+        useJUnitPlatform()
         filter {
             includeTestsMatching("*Test")
         }
