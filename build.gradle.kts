@@ -54,7 +54,7 @@ configure<JavaPluginConvention> {
 }
 
 tasks.register<Jar>("sourcesJar") {
-    from(sourceSets.main.get().allJava)
+    from(sourceSets.main.get().allSource)
     archiveClassifier.set("sources")
 }
 
