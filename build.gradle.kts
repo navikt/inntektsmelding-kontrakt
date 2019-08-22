@@ -59,6 +59,11 @@ tasks.register<Jar>("sourcesJar") {
     archiveClassifier.set("sources")
 }
 
+tasks.register<Jar>("javadocJar") {
+    from(tasks.javadoc)
+    archiveClassifier.set("javadoc")
+}
+
 publishing {
     repositories {
         maven {
@@ -73,6 +78,7 @@ publishing {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
             artifact(tasks.getByName("sourcesJar"))
+            artifact(tasks.getByName("javadocJar"))
             pom {
                 name.set("Income Report DTO")
                 description.set("Data Object for the Income report for Sickness Benefits")
