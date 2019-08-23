@@ -7,7 +7,7 @@ import java.util.*
 
 val dateFormat = SimpleDateFormat("yyyy.MM.dd-hh-mm")
 dateFormat.timeZone = TimeZone.getTimeZone(ZoneId.of("Europe/Oslo"))
-val gitHash = System.getenv("CIRCLE_SHA1") ?: "local-build"
+val gitHash = System.getenv("CIRCLE_SHA1")?.takeLast(5) ?: "local-build"
 val javaTimeAdapterVersion = "1.1.3"
 
 group = "no.nav.sykepenger.kontrakter"
