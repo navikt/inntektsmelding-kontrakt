@@ -10,14 +10,14 @@ data class Inntektsmelding(
         val arbeidstakerFnr: String,
         /** Virksomhetsnummer for den virksomheten arbeidstaker er knyttet til (har arbeidsforhold hos)  */
         @JsonFormat(pattern = "[0-9]{9}")
-        val virksomhetsnummer: String,
+        val virksomhetsnummer: String? = null,
         /** Arbeidsgivers fødselsnummer/dnr */
         @JsonFormat(pattern = "[0-9]{11}")
-        val arbeidsgiverFnr: String?,
+        val arbeidsgiverFnr: String? = null,
         /** ArbeidsforholdId skal oppgis når en arbeidstaker har flere arbeidsforhold hos den samme virksomheten slik at det
          * må sendes inn flere inntektsmeldinger for en arbeidstaker Det skal benyttes samme arbeidsforholdId som sendes inn
          * til a-ordningen og arbeidstakerregisteret.   */
-        val arbeidsforholdId: String?,
+        val arbeidsforholdId: String? = null,
         /** Felt på sykepenger og svangerskapspenger for å angi første fraværsdag ved alle arbeidsforhold. Feltet trengs for
          * å kunne knytte den enkelte inntektsmeldingen til riktig fravær. Dette er det spesielt behov for dersom den
          * sykmeldte har flere fraværsperioder innenfor et så kort tidsrom at det ikke skal beregnes ny arbeidsgiverperiode.
@@ -31,10 +31,10 @@ data class Inntektsmelding(
          * arbeidsforholdet» under begrunnelseForReduksjonEllerIkkeUtbetalt, skal  det ikke angis dato.
          */
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-        val foersteFravaersdag: LocalDate?,
+        val foersteFravaersdag: LocalDate? = null,
         /** Oppgi inntekt som samsvarer med folketrygdloven § 8-28. Oppgis som månedsbeløp. Beløp med to desimaler.
          * Det skal alltid opplyses full lønn.  */
-        val beregnetInntekt: Float?,
+        val beregnetInntekt: Float? = null,
         /** Inneholder opplysninger om refusjon  */
         val refusjon: Refusjon,
         /** Inneholder opplysninger om endring i krav om refusjon i fraværsperioden.  */

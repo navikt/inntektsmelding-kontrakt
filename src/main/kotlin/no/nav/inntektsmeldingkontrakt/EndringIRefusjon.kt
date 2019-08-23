@@ -1,7 +1,7 @@
 package no.nav.inntektsmeldingkontrakt
 
-import java.time.LocalDate
 import com.fasterxml.jackson.annotation.JsonFormat
+import java.time.LocalDate
 
 data class EndringIRefusjon (
 

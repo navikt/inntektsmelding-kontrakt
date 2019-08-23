@@ -7,7 +7,7 @@ class InntektsmeldingTest {
 
     @Test
     fun getVirksomhetsnummer() {
-        val r = Refusjon( 15f, LocalDate.now() );
+        val r = Refusjon(15f, LocalDate.now())
         assertEquals(15f, r.beloepPrMnd)
     }
 

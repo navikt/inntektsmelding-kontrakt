@@ -1,10 +1,8 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.util.Date
-import org.gradle.api.tasks.bundling.Jar
 import de.marcphilipp.gradle.nexus.NexusPublishExtension
-import java.time.ZoneId
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.text.SimpleDateFormat
-import java.util.TimeZone
+import java.time.ZoneId
+import java.util.*
 
 
 val dateFormat = SimpleDateFormat("yyyy.MM.dd-hh-mm")
@@ -30,6 +28,9 @@ dependencies {
     implementation("com.migesok", "jaxb-java-time-adapters", javaTimeAdapterVersion)
     implementation("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
     implementation("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
+    implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.3.1")
 }
