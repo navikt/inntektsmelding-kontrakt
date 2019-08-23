@@ -12,6 +12,9 @@ jobs:
           name: Build artifact
           command: ./gradlew build -x test
       - run:
+          name: Build artifact
+          command: ./gradlew sourcesJar javadocJar
+      - run:
           name: Run tests
           command: ./gradlew test
       - barkendeploy/gradle-cache-persist
