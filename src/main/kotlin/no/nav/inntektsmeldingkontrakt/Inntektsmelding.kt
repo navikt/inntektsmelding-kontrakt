@@ -2,17 +2,18 @@ package no.nav.inntektsmeldingkontrakt
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDate
+import javax.validation.constraints.Pattern
 
 data class Inntektsmelding(
 
         /** Arbeidstakers fødselsnummer/dnr  */
-        @JsonFormat(pattern = "[0-9]{11}")
+        @Pattern(regexp = "[0-9]{11}")
         val arbeidstakerFnr: String,
         /** Virksomhetsnummer for den virksomheten arbeidstaker er knyttet til (har arbeidsforhold hos)  */
-        @JsonFormat(pattern = "[0-9]{9}")
+        @Pattern(regexp = "[0-9]{9}")
         val virksomhetsnummer: String? = null,
         /** Arbeidsgivers fødselsnummer/dnr */
-        @JsonFormat(pattern = "[0-9]{11}")
+        @Pattern(regexp = "[0-9]{11}")
         val arbeidsgiverFnr: String? = null,
         /** ArbeidsforholdId skal oppgis når en arbeidstaker har flere arbeidsforhold hos den samme virksomheten slik at det
          * må sendes inn flere inntektsmeldinger for en arbeidstaker Det skal benyttes samme arbeidsforholdId som sendes inn
