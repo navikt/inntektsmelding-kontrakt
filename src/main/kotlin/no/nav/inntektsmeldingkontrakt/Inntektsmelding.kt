@@ -9,15 +9,22 @@ data class Inntektsmelding(
         /** Arbeidstakers fødselsnummer/dnr  */
         @Pattern(regexp = "[0-9]{11}")
         val arbeidstakerFnr: String,
+        /** Arbeidstakers aktørId */
+        @Pattern(regexp = "[0-9]{13}")
+        val arbeidstakerAktorId: String,
         /** Virksomhetsnummer for den virksomheten arbeidstaker er knyttet til (har arbeidsforhold hos)
          * Denne skal ha verdi hvis arbeidsgivertype er virksomhet */
         @Pattern(regexp = "[0-9]{9}")
         val virksomhetsnummer: String? = null,
         /** Arbeidsgivers fødselsnummer/dnr
-         * Denne skal ha verdi hvis arbeidsgivertype er privat */
+         * Denne skal ha verdi hvis arbeidsgiver er en privatperson */
         @Pattern(regexp = "[0-9]{11}")
         val arbeidsgiverFnr: String? = null,
-        /** Hvaslags type arbeidsgiver det gjelder: Privat eller virksomhet */
+        /** Arbeidsgivers aktørId
+         * Denne skal ha verdi hvis arbeidsgiver er en privatperson */
+        @Pattern(regexp = "[0-9]{13}")
+        val arbeidsgiverAktorId: String,
+        /** Hvaslags type arbeidsgiver det gjelder: Privatperson eller virksomhet */
         val arbeidsgivertype: Arbeidsgivertype,
         /** ArbeidsforholdId skal oppgis når en arbeidstaker har flere arbeidsforhold hos den samme virksomheten slik at det
          * må sendes inn flere inntektsmeldinger for en arbeidstaker Det skal benyttes samme arbeidsforholdId som sendes inn
