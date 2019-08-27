@@ -18,6 +18,7 @@ internal class JacksonJsonConfigTest {
         val inntektsmelding = Inntektsmelding(
                 foersteFravaersdag = LocalDate.of(2019, 1, 1),
                 arbeidstakerFnr = "00000000000",
+                arbeidstakerAktorId = "00000000000",
                 refusjon = Refusjon(),
                 endringIRefusjoner = emptyList(),
                 opphoerAvNaturalytelser = emptyList(),

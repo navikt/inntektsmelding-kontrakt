@@ -23,7 +23,7 @@ data class Inntektsmelding(
         /** Arbeidsgivers aktørId
          * Denne skal ha verdi hvis arbeidsgiver er en privatperson */
         @Pattern(regexp = "[0-9]{13}")
-        val arbeidsgiverAktorId: String,
+        val arbeidsgiverAktorId: String? = null,
         /** Er arbeidsgiver en organisasjon (identifisert med virksomhetsnummer), eller en privatperson (identifisert med fnr/aktørId) */
         val arbeidsgivertype: Arbeidsgivertype,
         /** ArbeidsforholdId skal oppgis når en arbeidstaker har flere arbeidsforhold hos den samme virksomheten slik at det
