@@ -16,8 +16,10 @@ internal class JacksonJsonConfigTest {
     @Test
     fun skal_deserialisere_dato() {
         val inntektsmelding = Inntektsmelding(
+                inntektsmeldingId = "ENLANGIDENTIFIKATOR",
                 foersteFravaersdag = LocalDate.of(2019, 1, 1),
                 arbeidstakerFnr = "00000000000",
+                arbeidstakerAktorId = "00000000000",
                 refusjon = Refusjon(),
                 endringIRefusjoner = emptyList(),
                 opphoerAvNaturalytelser = emptyList(),
@@ -30,6 +32,5 @@ internal class JacksonJsonConfigTest {
             foersteFravaersdag":"2019-01-01"
         """.trimIndent()))
     }
-
 
 }
