@@ -54,6 +54,9 @@ data class Inntektsmelding(
         /** Inneholder opplysninger om gjenopptakelse av naturalytelse  */
         val gjenopptakelseNaturalytelser: List<GjenopptakelseNaturalytelse>,
 
+        /** Liste av perioder dekket av arbeidsgiver*/
+        val arbeidsgiverperioder: List<Periode>,
+
         /** Om inntektsmeldingen har kjente mangler eller anses som å være gyldig */
         val status: Status
 

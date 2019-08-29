@@ -1,12 +1,10 @@
 package no.nav.inntektsmelding.kontrakt.serde
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import no.nav.inntektsmeldingkontrakt.Arbeidsgivertype
-import no.nav.inntektsmeldingkontrakt.Inntektsmelding
-import no.nav.inntektsmeldingkontrakt.Refusjon
-import no.nav.inntektsmeldingkontrakt.Status
+import no.nav.inntektsmeldingkontrakt.*
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import java.time.LocalDate
 
 internal class JacksonJsonConfigTest {
 
@@ -23,11 +21,12 @@ internal class JacksonJsonConfigTest {
                 opphoerAvNaturalytelser = emptyList(),
                 gjenopptakelseNaturalytelser = emptyList(),
                 status = Status.GYLDIG,
-                arbeidsgivertype = Arbeidsgivertype.VIRKSOMHET
+                arbeidsgivertype = Arbeidsgivertype.VIRKSOMHET,
+                arbeidsgiverperioder = listOf(Periode(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 1, 2)))
         )
         val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
         assertTrue(serialisertInntektsmelding.contains("""
-            foersteFravaersdag":"2019-01-01"
+            fom":"2019-01-01"
         """.trimIndent()))
     }
 
