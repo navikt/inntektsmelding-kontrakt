@@ -7,7 +7,7 @@ Intern kontrakt for inntektsmelding internt i sykepenger
 
 # Komme i gang
 
-Prosjektet tas inn som en dependency for de som skal produsere/konsumere disse objektene
+Prosjektet tas inn som en dependency for de som skal produsere eller konsumere disse objektene
 
 ---
 
