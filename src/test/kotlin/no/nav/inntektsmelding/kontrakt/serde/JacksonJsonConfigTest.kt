@@ -7,7 +7,6 @@ import no.nav.inntektsmeldingkontrakt.Refusjon
 import no.nav.inntektsmeldingkontrakt.Status
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import java.time.LocalDate
 
 internal class JacksonJsonConfigTest {
 
@@ -17,7 +16,6 @@ internal class JacksonJsonConfigTest {
     fun skal_deserialisere_dato() {
         val inntektsmelding = Inntektsmelding(
                 inntektsmeldingId = "ENLANGIDENTIFIKATOR",
-                foersteFravaersdag = LocalDate.of(2019, 1, 1),
                 arbeidstakerFnr = "00000000000",
                 arbeidstakerAktorId = "00000000000",
                 refusjon = Refusjon(),
