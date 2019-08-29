@@ -15,6 +15,7 @@ version = "${dateFormat.format(Date())}-$gitHash"
 
 plugins {
     kotlin("jvm") version "1.3.41"
+    java
     "maven-publish"
     signing
     id("io.codearte.nexus-staging") version "0.21.0"
