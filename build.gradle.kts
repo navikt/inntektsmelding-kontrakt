@@ -54,7 +54,7 @@ configure<NexusPublishExtension> {
 }
 
 configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_1_8
 }
 
 tasks.register<Jar>("sourcesJar") {
@@ -123,7 +123,7 @@ signing {
 
 tasks {
     withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "11"
+        kotlinOptions.jvmTarget = "1.8"
     }
     register("printVersion") {
         doLast {
