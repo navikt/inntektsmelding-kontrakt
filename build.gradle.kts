@@ -20,6 +20,7 @@ plugins {
     signing
     id("io.codearte.nexus-staging") version "0.21.0"
     id("de.marcphilipp.nexus-publish") version "0.2.0"
+    id("net.rdrei.android.buildtimetracker") version "0.11.0"
 }
 
 val jacksonVersion = "2.9.9"
@@ -159,6 +160,16 @@ version=${project.version}
         useJUnitPlatform()
         filter {
             includeTestsMatching("*Test")
+        }
+    }
+}
+
+buildtimetracker {
+    reporters {
+        register("summary") {
+            options["ordered"] = "true"
+            options["barstyle"] = "ascii"
+            options["shortenTaskNames"] = "false"
         }
     }
 }
