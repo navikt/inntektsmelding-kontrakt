@@ -1,6 +1,8 @@
 package no.nav.inntektsmeldingkontrakt
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import java.math.BigDecimal
 import java.time.LocalDate
 
 data class GjenopptakelseNaturalytelse(
@@ -14,7 +16,8 @@ data class GjenopptakelseNaturalytelse(
         val fom: LocalDate? = null,
 
         /** ???  */
-        val beloepPrMnd: Float? = null
+        @field: JsonSerialize(using = PengeSerialiserer::class)
+        val beloepPrMnd: BigDecimal? = null
 
 
 )

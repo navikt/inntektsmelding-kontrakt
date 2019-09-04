@@ -1,6 +1,8 @@
 package no.nav.inntektsmeldingkontrakt
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import java.math.BigDecimal
 import java.time.LocalDate
 
 data class EndringIRefusjon (
@@ -18,6 +20,7 @@ data class EndringIRefusjon (
      * brukes ved endringer knyttet til sykemeldingsgrad. Endring i refusjon er knyttet til for eksempel
      * stillingsendringer.
      */
-    val beloep: Float? = null
+    @field: JsonSerialize(using = PengeSerialiserer::class)
+    val beloep: BigDecimal? = null
 
 )
