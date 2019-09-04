@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import no.nav.inntektsmeldingkontrakt.*
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import java.math.BigDecimal
 import java.time.LocalDate
 
 internal class JacksonJsonConfigTest {
@@ -11,7 +12,7 @@ internal class JacksonJsonConfigTest {
     val objectMapper: ObjectMapper = JacksonJsonConfig.opprettObjectMapper()
 
     @Test
-    fun skal_deserialisere_dato() {
+    fun skal_deserialisere_dato_og_penger() {
         val inntektsmelding = Inntektsmelding(
                 inntektsmeldingId = "ENLANGIDENTIFIKATOR",
                 arbeidstakerFnr = "00000000000",
@@ -22,12 +23,21 @@ internal class JacksonJsonConfigTest {
                 gjenopptakelseNaturalytelser = emptyList(),
                 status = Status.GYLDIG,
                 arbeidsgivertype = Arbeidsgivertype.VIRKSOMHET,
-                arbeidsgiverperioder = listOf(Periode(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 1, 2)))
+                arbeidsgiverperioder = listOf(Periode(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 1, 2))),
+                beregnetInntekt = BigDecimal("249000.516")
         )
         val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
-        assertTrue(serialisertInntektsmelding.contains("""
-            fom":"2019-01-01"
-        """.trimIndent()))
+        skalInneholdeTekst(serialisertInntektsmelding, """
+                        "fom":"2019-01-01"
+                    """)
+        skalInneholdeTekst(serialisertInntektsmelding, """
+                        "beregnetInntekt":"249000.52"
+                    """)
+        println(serialisertInntektsmelding)
+    }
+
+    private fun skalInneholdeTekst(serialisertInntektsmelding: String, tekst: String) {
+        assertTrue(serialisertInntektsmelding.contains(tekst.trimIndent()))
     }
 
 }

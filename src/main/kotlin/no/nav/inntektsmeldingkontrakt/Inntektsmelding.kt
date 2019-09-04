@@ -1,6 +1,15 @@
 package no.nav.inntektsmeldingkontrakt
 
+import com.fasterxml.jackson.core.JsonGenerator
+import com.fasterxml.jackson.core.JsonProcessingException
+import com.fasterxml.jackson.databind.JsonSerializer
+import com.fasterxml.jackson.databind.SerializerProvider
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import java.io.IOException
+import java.math.BigDecimal
+import java.math.RoundingMode
 import javax.validation.constraints.Pattern
+
 
 data class Inntektsmelding(
 
@@ -40,7 +49,8 @@ data class Inntektsmelding(
 
         /** Oppgi inntekt som samsvarer med folketrygdloven § 8-28. Oppgis som månedsbeløp. Beløp med to desimaler.
          * Det skal alltid opplyses full lønn.  */
-        val beregnetInntekt: Float? = null,
+        @field: JsonSerialize(using = PengeSerialiserer::class)
+        val beregnetInntekt: BigDecimal? = null,
 
         /** Inneholder opplysninger om refusjon  */
         val refusjon: Refusjon,
@@ -61,3 +71,11 @@ data class Inntektsmelding(
         val status: Status
 
 )
+
+class PengeSerialiserer : JsonSerializer<BigDecimal>() {
+        @Throws(IOException::class, JsonProcessingException::class)
+        override fun serialize(value: BigDecimal, jgen: JsonGenerator, provider: SerializerProvider) {
+                // put your desired money style here
+                jgen.writeString(value.setScale(2, RoundingMode.HALF_UP).toString())
+        }
+}
