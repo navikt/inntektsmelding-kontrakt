@@ -2,6 +2,7 @@ package no.nav.inntektsmelding.kontrakt.serde
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import no.nav.inntektsmeldingkontrakt.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
@@ -34,6 +35,12 @@ internal class JacksonJsonConfigTest {
                         "beregnetInntekt":"249000.52"
                     """)
         println(serialisertInntektsmelding)
+
+
+        val deserialsertInntektsmelding = objectMapper.readValue(serialisertInntektsmelding, Inntektsmelding::class.java)
+        assertEquals(inntektsmelding.arbeidsgiverperioder.get(0), deserialsertInntektsmelding.arbeidsgiverperioder.get(0))
+        assertEquals(BigDecimal("249000.52"), deserialsertInntektsmelding.beregnetInntekt)
+
     }
 
     private fun skalInneholdeTekst(serialisertInntektsmelding: String, tekst: String) {
