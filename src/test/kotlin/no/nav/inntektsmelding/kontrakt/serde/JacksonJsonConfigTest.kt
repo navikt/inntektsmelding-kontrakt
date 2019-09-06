@@ -25,7 +25,8 @@ internal class JacksonJsonConfigTest {
                 status = Status.GYLDIG,
                 arbeidsgivertype = Arbeidsgivertype.VIRKSOMHET,
                 arbeidsgiverperioder = listOf(Periode(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 1, 2))),
-                beregnetInntekt = BigDecimal("249000.516")
+                beregnetInntekt = BigDecimal("249000.516"),
+                arkivreferanse = "AR123"
         )
         val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
         skalInneholdeTekst(serialisertInntektsmelding, """

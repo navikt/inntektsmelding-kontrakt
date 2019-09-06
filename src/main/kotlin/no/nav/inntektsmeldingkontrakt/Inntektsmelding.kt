@@ -15,7 +15,7 @@ import javax.validation.constraints.Pattern
 
 data class Inntektsmelding @JsonCreator constructor(
 
-        /** TODO forklare hvor denne id'en kommer fra */
+        /** UUID Generert av inntektsmelding mottak*/
         @JsonProperty("inntektsmeldingId")
         val inntektsmeldingId: String,
 
@@ -85,7 +85,11 @@ data class Inntektsmelding @JsonCreator constructor(
 
         /** Om inntektsmeldingen har kjente mangler eller anses som å være gyldig */
         @JsonProperty("status")
-        val status: Status
+        val status: Status,
+
+        /** Arkivreferanse fra altinn */
+        @JsonProperty("arkivreferanse")
+        val arkivreferanse: String
 
 )
 
