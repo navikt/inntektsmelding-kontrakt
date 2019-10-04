@@ -11,6 +11,7 @@ import java.io.IOException
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.validation.constraints.Pattern
 
 
@@ -102,7 +103,7 @@ data class Inntektsmelding @JsonCreator constructor(
 
         /** Når vi mottok inntektsmeldingen fra Altinn */
         @JsonProperty("mottattDato")
-        val mottattDato: LocalDate
+        val mottattDato: LocalDateTime
 )
 
 class PengeSerialiserer : JsonSerializer<BigDecimal>() {

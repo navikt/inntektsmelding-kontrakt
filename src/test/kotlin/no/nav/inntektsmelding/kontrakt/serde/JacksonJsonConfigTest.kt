@@ -37,7 +37,7 @@ internal class JacksonJsonConfigTest {
             beregnetInntekt = BigDecimal("249000.516"),
             arkivreferanse = "AR123",
             ferieperioder = emptyList(),
-            mottattDato = foersteJanuar,
+            mottattDato = foersteJanuar.atStartOfDay(),
             foersteFravaersdag = foersteJanuar
         )
 
@@ -88,7 +88,7 @@ internal class JacksonJsonConfigTest {
                     tom = andreJanuar
                 )
             ),
-            mottattDato = foersteJanuar,
+            mottattDato = foersteJanuar.atStartOfDay(),
             foersteFravaersdag = foersteJanuar
         )
 
