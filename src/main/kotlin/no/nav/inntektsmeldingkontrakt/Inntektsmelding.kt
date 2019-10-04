@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import java.io.IOException
 import java.math.BigDecimal
 import java.math.RoundingMode
+import java.time.LocalDate
 import javax.validation.constraints.Pattern
 
 
@@ -89,8 +90,19 @@ data class Inntektsmelding @JsonCreator constructor(
 
         /** Arkivreferanse fra altinn */
         @JsonProperty("arkivreferanse")
-        val arkivreferanse: String
+        val arkivreferanse: String,
 
+        /** Liste av perioder med ferie */
+        @JsonProperty("ferieperioder")
+        val ferieperioder: List<Periode>,
+
+        /** Første fraværsdag */
+        @JsonProperty("foersteFravaersdag")
+        val foersteFravaersdag: LocalDate,
+
+        /** Når vi mottok inntektsmeldingen fra Altinn */
+        @JsonProperty("mottattDato")
+        val mottattDato: LocalDate
 )
 
 class PengeSerialiserer : JsonSerializer<BigDecimal>() {
