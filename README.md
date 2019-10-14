@@ -1,8 +1,6 @@
 Inntektsmelding Kontrakt
 ================
 
-[![CircleCI](https://circleci.com/gh/navikt/inntektsmelding-kontrakt/tree/master.svg?style=svg)](https://circleci.com/gh/navikt/inntektsmelding-kontrakt/tree/master)
-
 Intern kontrakt for inntektsmelding internt i sykepenger
 
 # Komme i gang
