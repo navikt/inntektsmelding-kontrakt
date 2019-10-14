@@ -12,9 +12,9 @@ group = "no.nav.sykepenger.kontrakter"
 version = "${dateFormat.format(Date())}-$gitHash"
 
 plugins {
-    kotlin("jvm") version "1.3.41"
+    kotlin("jvm") version "1.3.50"
     java
-    "maven-publish"
+    id("maven-publish")
 }
 
 val jacksonVersion = "2.9.9"
