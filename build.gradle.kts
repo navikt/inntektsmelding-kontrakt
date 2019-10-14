@@ -41,7 +41,7 @@ configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
 }
 
-publishing {
+configure<PublishingExtension> {
     repositories {
         maven {
             url = uri("https://maven.pkg.github.com/navikt/inntektsmelding-kontrakt")
