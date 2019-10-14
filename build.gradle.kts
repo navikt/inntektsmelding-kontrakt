@@ -1,4 +1,3 @@
-import de.marcphilipp.gradle.nexus.NexusPublishExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.text.SimpleDateFormat
 import java.time.ZoneId
@@ -43,17 +42,6 @@ repositories {
     jcenter()
 }
 
-nexusStaging {
-    packageGroup = "no.nav"
-    username = System.getenv("SONATYPE_USERNAME")
-    password = System.getenv("SONATYPE_PASSWORD")
-}
-
-configure<NexusPublishExtension> {
-    username.set(System.getenv("SONATYPE_USERNAME"))
-    password.set(System.getenv("SONATYPE_PASSWORD"))
-}
-
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
 }
@@ -63,43 +51,24 @@ tasks.register<Jar>("sourcesJar") {
     archiveClassifier.set("sources")
 }
 
-tasks.register<Jar>("javadocJar") {
-    from(tasks.javadoc)
-    archiveClassifier.set("javadoc")
-}
 
 publishing {
     repositories {
         maven {
-            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2")
-            this.credentials {
-                username = System.getenv("SONATYPE_USERNAME")
-                password = System.getenv("SONATYPE_PASSWORD")
+            url = uri("https://maven.pkg.github.com/navikt/inntektsmelding-kontrakt")
+            credentials {
+                username = System.getenv("GITHUB_USERNAME")
+                password = System.getenv("GITHUB_PASSWORD")
             }
         }
     }
     publications {
         create<MavenPublication>("mavenJava") {
-            from(components["java"])
-            artifact(tasks.getByName("sourcesJar"))
-            artifact(tasks.getByName("javadocJar"))
+
             pom {
-                name.set("Income Report DTO")
-                description.set("Data Object for the Income report for Sickness Benefits")
+                name.set("inntektsmelding-kontrakt")
+                description.set("Kontrakt for utveksling av inntektsmelding i PO-Helse")
                 url.set("https://github.com/navikt/inntektsmelding-kontrakt")
-
-                organization {
-                    name.set("NAV (Arbeids- og velferdsdirektoratet) - The Norwegian Labour and Welfare Administration")
-                    url.set("https://www.nav.no/")
-                }
-
-                developers {
-                    developer {
-                        organization.set("NAV (Arbeids- og velferdsdirektoratet) - The Norwegian Labour and Welfare Administration")
-                        organizationUrl.set("https://www.nav.no/")
-                    }
-                }
-
                 licenses {
                     license {
                         name.set("MIT License")
@@ -113,9 +82,11 @@ publishing {
                     url.set("https://github.com/navikt/inntektsmelding-kontrakt")
                 }
             }
+            from(components["java"])
         }
     }
 }
+
 
 signing {
     useGpgCmd()
