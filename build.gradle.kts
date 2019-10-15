@@ -8,9 +8,8 @@ dateFormat.timeZone = TimeZone.getTimeZone(ZoneId.of("Europe/Oslo"))
 val gitHash = System.getenv("CIRCLE_SHA1")?.takeLast(5) ?: "local-build"
 val javaTimeAdapterVersion = "1.1.3"
 
-val groupId = "no.nav.sykepenger.kontrakter"
-val artifactId = "inntektsmelding-kontrakt"
-val version = "${dateFormat.format(Date())}-$gitHash"
+group = "no.nav.sykepenger.kontrakter"
+version = "${dateFormat.format(Date())}-$gitHash"
 
 plugins {
     kotlin("jvm") version "1.3.50"
@@ -53,11 +52,9 @@ configure<PublishingExtension> {
         }
     }
     publications {
-        create<MavenPublication>("maven") {
+        create<MavenPublication>("mavenJava") {
+
             pom {
-                artifactId = artifactId
-                groupId = groupId
-                version = version
                 name.set("inntektsmelding-kontrakt")
                 description.set("Kontrakt for utveksling av inntektsmelding i PO-Helse")
                 url.set("https://github.com/navikt/inntektsmelding-kontrakt")
