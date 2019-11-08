@@ -99,7 +99,7 @@ data class Inntektsmelding @JsonCreator constructor(
 
         /** Første fraværsdag */
         @JsonProperty("foersteFravaersdag")
-        val foersteFravaersdag: LocalDate,
+        val foersteFravaersdag: LocalDate?,
 
         /** Når vi mottok inntektsmeldingen fra Altinn */
         @JsonProperty("mottattDato")
