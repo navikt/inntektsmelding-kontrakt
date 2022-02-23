@@ -38,7 +38,8 @@ internal class JacksonJsonConfigTest {
             arkivreferanse = "AR123",
             ferieperioder = emptyList(),
             mottattDato = foersteJanuar.atStartOfDay(),
-            foersteFravaersdag = foersteJanuar
+            foersteFravaersdag = foersteJanuar,
+            naerRelasjon = true
         )
 
         val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
@@ -89,7 +90,8 @@ internal class JacksonJsonConfigTest {
                 )
             ),
             mottattDato = foersteJanuar.atStartOfDay(),
-            foersteFravaersdag = foersteJanuar
+            foersteFravaersdag = foersteJanuar,
+            naerRelasjon = true
         )
 
         val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
