@@ -1,4 +1,4 @@
-name: Publiser
+name: Test
 
 on: [pull_request]
 
