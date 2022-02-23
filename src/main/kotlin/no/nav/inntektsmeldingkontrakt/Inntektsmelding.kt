@@ -111,9 +111,9 @@ data class Inntektsmelding @JsonCreator constructor(
         @JsonProperty("mottattDato")
         val mottattDato: LocalDateTime,
 
-        /** Når vi mottok inntektsmeldingen fra Altinn */
-        @JsonProperty("mottattDato")
-        val naerRelasjon: Boolean
+        /** Nær relasjon */
+        @JsonProperty("naerRelasjon")
+        val naerRelasjon: Boolean?
 )
 
 class PengeSerialiserer : JsonSerializer<BigDecimal>() {
