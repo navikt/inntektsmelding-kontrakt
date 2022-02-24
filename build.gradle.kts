@@ -12,7 +12,7 @@ group = "no.nav.sykepenger.kontrakter"
 version = "${dateFormat.format(Date())}-$gitHash"
 
 plugins {
-    kotlin("jvm") version "1.3.50"
+    kotlin("jvm") version "1.5.30"
     java
     id("maven-publish")
 }
@@ -74,4 +74,12 @@ configure<PublishingExtension> {
             from(components["java"])
         }
     }
+}
+
+tasks.named<Test>("test") {
+    include("no/nav/inntektsmelding/**")
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
