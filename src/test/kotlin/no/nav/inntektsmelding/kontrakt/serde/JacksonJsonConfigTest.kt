@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Test
 import java.math.BigDecimal
 import java.time.LocalDate
 
-internal class JacksonJsonConfigTest {
+class JacksonJsonConfigTest {
 
     val objectMapper: ObjectMapper = JacksonJsonConfig.opprettObjectMapper()
 
     companion object {
         private val foersteJanuar = LocalDate.of(2019,1,1)
-        private val andreJanuar = LocalDate.of(2019,1,1)
+        private val andreJanuar = LocalDate.of(2019,1,2)
     }
 
     @Test
@@ -38,7 +38,8 @@ internal class JacksonJsonConfigTest {
             arkivreferanse = "AR123",
             ferieperioder = emptyList(),
             mottattDato = foersteJanuar.atStartOfDay(),
-            foersteFravaersdag = foersteJanuar
+            foersteFravaersdag = foersteJanuar,
+            naerRelasjon = true
         )
 
         val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
@@ -89,7 +90,8 @@ internal class JacksonJsonConfigTest {
                 )
             ),
             mottattDato = foersteJanuar.atStartOfDay(),
-            foersteFravaersdag = foersteJanuar
+            foersteFravaersdag = foersteJanuar,
+            naerRelasjon = true
         )
 
         val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
