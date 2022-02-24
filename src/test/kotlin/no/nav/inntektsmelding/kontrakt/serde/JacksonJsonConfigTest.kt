@@ -17,8 +17,8 @@ class JacksonJsonConfigTest {
     val objectMapper: ObjectMapper = JacksonJsonConfig.opprettObjectMapper()
 
     companion object {
-        private val foersteJanuar = LocalDate.of(2019,5,1)
-        private val andreJanuar = LocalDate.of(2019,1,1)
+        private val foersteJanuar = LocalDate.of(2019,1,1)
+        private val andreJanuar = LocalDate.of(2019,1,2)
     }
 
     @Test
