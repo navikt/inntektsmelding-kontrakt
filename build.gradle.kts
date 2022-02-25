@@ -1,6 +1,7 @@
 import java.text.SimpleDateFormat
 import java.time.ZoneId
-import java.util.*
+import java.util.Date
+import java.util.TimeZone
 
 
 val dateFormat = SimpleDateFormat("yyyy.MM.dd-hh-mm")
@@ -12,12 +13,12 @@ group = "no.nav.sykepenger.kontrakter"
 version = "${dateFormat.format(Date())}-$gitHash"
 
 plugins {
-    kotlin("jvm") version "1.5.30"
+    kotlin("jvm") version "1.6.0"
     java
     id("maven-publish")
 }
 
-val jacksonVersion = "2.9.9"
+val jacksonVersion = "2.13.1"
 
 dependencies {
     implementation(kotlin("stdlib"))
@@ -27,9 +28,9 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
-    implementation("javax.validation:validation-api:2.0.0.Final")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.3.1")
+    implementation("javax.validation:validation-api:2.0.1.Final")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
 }
 
 repositories {
