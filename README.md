@@ -13,8 +13,9 @@ Prosjektet tas inn som en dependency for de som skal produsere eller konsumere d
 
 Spørsmål knyttet til koden eller prosjektet kan rettes mot:
 
-* Morten Laukvik, morten.laukvik@nav.no
 * Dag Raaum, dag.raaum@nav.no
+* Gustav Berggren, gustav.berggren@nav.no
+* Morten Byhring, morten.byhring@nav.no
 
 ## For NAV-ansatte
 
