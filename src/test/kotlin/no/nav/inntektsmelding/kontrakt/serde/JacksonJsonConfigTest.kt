@@ -2,6 +2,7 @@ package no.nav.inntektsmelding.kontrakt.serde
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import no.nav.inntektsmeldingkontrakt.Arbeidsgivertype
+import no.nav.inntektsmeldingkontrakt.AvsenderSystem
 import no.nav.inntektsmeldingkontrakt.Inntektsmelding
 import no.nav.inntektsmeldingkontrakt.Periode
 import no.nav.inntektsmeldingkontrakt.Refusjon
@@ -17,8 +18,8 @@ class JacksonJsonConfigTest {
     val objectMapper: ObjectMapper = JacksonJsonConfig.opprettObjectMapper()
 
     companion object {
-        private val foersteJanuar = LocalDate.of(2019,1,1)
-        private val andreJanuar = LocalDate.of(2019,1,2)
+        private val foersteJanuar = LocalDate.of(2019, 1, 1)
+        private val andreJanuar = LocalDate.of(2019, 1, 2)
     }
 
     @Test
@@ -39,19 +40,18 @@ class JacksonJsonConfigTest {
             ferieperioder = emptyList(),
             mottattDato = foersteJanuar.atStartOfDay(),
             foersteFravaersdag = foersteJanuar,
-            naerRelasjon = true
+            naerRelasjon = true,
+            avsenderSystem = AvsenderSystem("AltinnPortal", "1.0")
         )
 
         val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
         skalInneholdeTekst(
-            serialisertInntektsmelding, """
-                        "fom":"2019-01-01"
-                    """
+            serialisertInntektsmelding,
+            """"fom":"2019-01-01""""
         )
         skalInneholdeTekst(
-            serialisertInntektsmelding, """
-                        "beregnetInntekt":"249000.52"
-                    """
+            serialisertInntektsmelding,
+            """"beregnetInntekt":"249000.52""""
         )
         println(serialisertInntektsmelding)
 
@@ -62,6 +62,10 @@ class JacksonJsonConfigTest {
             deserialsertInntektsmelding.arbeidsgiverperioder.get(0)
         )
         assertEquals(BigDecimal("249000.52"), deserialsertInntektsmelding.beregnetInntekt)
+        skalInneholdeTekst(
+            serialisertInntektsmelding,
+            """"avsenderSystem":{"avsenderSystemNavn":"AltinnPortal","avsenderSystemVersjon":"1.0"}"""
+        )
     }
 
     @Test
@@ -107,5 +111,4 @@ class JacksonJsonConfigTest {
     private fun skalInneholdeTekst(serialisertInntektsmelding: String, tekst: String) {
         assertTrue(serialisertInntektsmelding.contains(tekst.trimIndent()))
     }
-
 }
