@@ -47,15 +47,11 @@ class JacksonJsonConfigTest {
         val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
         skalInneholdeTekst(
             serialisertInntektsmelding,
-            """
-                        "fom":"2019-01-01"
-                    """
+            """"fom":"2019-01-01""""
         )
         skalInneholdeTekst(
             serialisertInntektsmelding,
-            """
-                        "beregnetInntekt":"249000.52"
-                    """
+            """"beregnetInntekt":"249000.52""""
         )
         println(serialisertInntektsmelding)
 
@@ -68,8 +64,7 @@ class JacksonJsonConfigTest {
         assertEquals(BigDecimal("249000.52"), deserialsertInntektsmelding.beregnetInntekt)
         skalInneholdeTekst(
             serialisertInntektsmelding,
-            """
-            "avsenderSystem":{"avsenderSystemNavn":"AltinnPortal","avsenderSystemVersjon":"1.0"}"""
+            """"avsenderSystem":{"avsenderSystemNavn":"AltinnPortal","avsenderSystemVersjon":"1.0"}"""
         )
     }
 
