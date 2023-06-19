@@ -2,7 +2,7 @@ package no.nav.inntektsmelding.kontrakt.serde
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import no.nav.inntektsmeldingkontrakt.Arbeidsgivertype
-import no.nav.inntektsmeldingkontrakt.Avsender
+import no.nav.inntektsmeldingkontrakt.AvsenderSystem
 import no.nav.inntektsmeldingkontrakt.Inntektsmelding
 import no.nav.inntektsmeldingkontrakt.Periode
 import no.nav.inntektsmeldingkontrakt.Refusjon
@@ -41,7 +41,7 @@ class JacksonJsonConfigTest {
             mottattDato = foersteJanuar.atStartOfDay(),
             foersteFravaersdag = foersteJanuar,
             naerRelasjon = true,
-            avsender = Avsender("AltinnPortal", "1.0")
+            avsenderSystem = AvsenderSystem("AltinnPortal", "1.0")
         )
 
         val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
@@ -69,7 +69,7 @@ class JacksonJsonConfigTest {
         skalInneholdeTekst(
             serialisertInntektsmelding,
             """
-            "avsender":{"avsenderSystemNavn":"AltinnPortal","avsenderSystemVersjon":"1.0"}"""
+            "avsenderSystem":{"avsenderSystemNavn":"AltinnPortal","avsenderSystemVersjon":"1.0"}"""
         )
     }
 

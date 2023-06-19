@@ -115,8 +115,8 @@ data class Inntektsmelding @JsonCreator constructor(
     val naerRelasjon: Boolean?,
 
     /** Systemet som har sendt inntektsmeldingen */
-    @JsonProperty("avsender")
-    val avsender: Avsender? = null,
+    @JsonProperty("avsenderSystem")
+    val avsenderSystem: AvsenderSystem? = null,
 )
 
 class PengeSerialiserer : JsonSerializer<BigDecimal>() {
