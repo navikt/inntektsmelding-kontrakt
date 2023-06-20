@@ -64,7 +64,7 @@ class JacksonJsonConfigTest {
         assertEquals(BigDecimal("249000.52"), deserialsertInntektsmelding.beregnetInntekt)
         skalInneholdeTekst(
             serialisertInntektsmelding,
-            """"avsenderSystem":{"avsenderSystemNavn":"AltinnPortal","avsenderSystemVersjon":"1.0"}"""
+            """"avsenderSystem":{"navn":"AltinnPortal","versjon":"1.0"}"""
         )
     }
 
