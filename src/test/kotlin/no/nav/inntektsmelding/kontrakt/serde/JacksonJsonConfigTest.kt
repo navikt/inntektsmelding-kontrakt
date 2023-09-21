@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
+import java.math.RoundingMode
 import java.time.LocalDate
 
 class JacksonJsonConfigTest {
@@ -41,7 +42,9 @@ class JacksonJsonConfigTest {
             mottattDato = foersteJanuar.atStartOfDay(),
             foersteFravaersdag = foersteJanuar,
             naerRelasjon = true,
-            avsenderSystem = AvsenderSystem("AltinnPortal", "1.0")
+            avsenderSystem = AvsenderSystem("AltinnPortal", "1.0"),
+            innsenderFulltNavn = "",
+            innsenderTelefon = ""
         )
 
         val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
@@ -70,6 +73,10 @@ class JacksonJsonConfigTest {
 
     @Test
     fun kan_deserialisere_og_serialisere_med_ferie() {
+        val innsenderFulltNavn = "Det er jeg som er sjefen"
+        val innsenderTelefon = "+47 123 45 678"
+        val begrunnelseForReduksjonEllerIkkeUtbetalt = "Ferie kanskje?"
+        val bruttoUtbetalt = BigDecimal(12345.67)
         val inntektsmelding = Inntektsmelding(
             inntektsmeldingId = "ENLANGIDENTIFIKATOR",
             arbeidstakerFnr = "00000000000",
@@ -95,7 +102,11 @@ class JacksonJsonConfigTest {
             ),
             mottattDato = foersteJanuar.atStartOfDay(),
             foersteFravaersdag = foersteJanuar,
-            naerRelasjon = true
+            naerRelasjon = true,
+            innsenderFulltNavn = innsenderFulltNavn,
+            innsenderTelefon = innsenderTelefon,
+            begrunnelseForReduksjonEllerIkkeUtbetalt = begrunnelseForReduksjonEllerIkkeUtbetalt,
+            bruttoUtbetalt = bruttoUtbetalt
         )
 
         val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
@@ -106,6 +117,10 @@ class JacksonJsonConfigTest {
         assertEquals(2, deserialsertInntektsmelding.ferieperioder.size)
         assertEquals(foersteJanuar, deserialsertInntektsmelding.ferieperioder[0].fom)
         assertEquals(foersteJanuar, deserialsertInntektsmelding.ferieperioder[0].tom)
+        assertEquals(innsenderFulltNavn, deserialsertInntektsmelding.innsenderFulltNavn)
+        assertEquals(innsenderTelefon, deserialsertInntektsmelding.innsenderTelefon)
+        assertEquals(begrunnelseForReduksjonEllerIkkeUtbetalt, deserialsertInntektsmelding.begrunnelseForReduksjonEllerIkkeUtbetalt)
+        assertEquals(bruttoUtbetalt.setScale(2, RoundingMode.HALF_UP), deserialsertInntektsmelding.bruttoUtbetalt)
     }
 
     private fun skalInneholdeTekst(serialisertInntektsmelding: String, tekst: String) {

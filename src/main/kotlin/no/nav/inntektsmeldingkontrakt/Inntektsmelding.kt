@@ -48,11 +48,25 @@ data class Inntektsmelding @JsonCreator constructor(
     @JsonProperty("arbeidsgiverAktorId")
     val arbeidsgiverAktorId: String? = null,
 
+    /** Innsenderens (Kontaktperson hos arbeidsgiver) navn */
+    @JsonProperty("innsenderFulltNavn")
+    val innsenderFulltNavn: String,
+
+    /** Innsenderens (Kontaktperson hos arbeidsgiver) telefonnummer */
+    @JsonProperty("innsenderTelefon")
+    val innsenderTelefon: String,
     /**
      * Eventuell begrunnelse for hvorfor det ikke er utbetalt, eller beløpet er redusert
      */
     @JsonProperty("begrunnelseForReduksjonEllerIkkeUtbetalt")
     val begrunnelseForReduksjonEllerIkkeUtbetalt: String? = null,
+
+    /**
+     * Beløpet som ble utbetalt i arbeidsgiverperioden hvis ikke full lønn
+     */
+    @field: JsonSerialize(using = PengeSerialiserer::class)
+    @JsonProperty("bruttoUtbetalt")
+    val bruttoUtbetalt: BigDecimal? = null,
 
     /** Er arbeidsgiver en organisasjon (identifisert med virksomhetsnummer), eller en privatperson (identifisert med fnr/aktørId) */
     @JsonProperty("arbeidsgivertype")

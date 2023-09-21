@@ -4,10 +4,11 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
 import java.time.LocalDate
+
 class InntektsmeldingTest {
 
     @Test
-    fun getVirksomhetsnummer() {
+    fun getRefusjon() {
         val r = Refusjon(BigDecimal.TEN, LocalDate.now())
         assertEquals(BigDecimal.TEN, r.beloepPrMnd)
     }
