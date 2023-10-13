@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.time.LocalDate
+import java.time.Month
 
 class JacksonJsonConfigTest {
 
@@ -37,6 +38,7 @@ class JacksonJsonConfigTest {
             arbeidsgivertype = Arbeidsgivertype.VIRKSOMHET,
             arbeidsgiverperioder = listOf(Periode(foersteJanuar, andreJanuar)),
             beregnetInntekt = BigDecimal("249000.516"),
+            inntektsdato = LocalDate.of(2023, Month.OCTOBER, 13),
             arkivreferanse = "AR123",
             ferieperioder = emptyList(),
             mottattDato = foersteJanuar.atStartOfDay(),
@@ -55,6 +57,11 @@ class JacksonJsonConfigTest {
         skalInneholdeTekst(
             serialisertInntektsmelding,
             """"beregnetInntekt":"249000.52""""
+        )
+        println(serialisertInntektsmelding)
+        skalInneholdeTekst(
+            serialisertInntektsmelding,
+            """"inntektsdato":"2023-10-13""""
         )
         println(serialisertInntektsmelding)
 

@@ -84,6 +84,11 @@ data class Inntektsmelding @JsonCreator constructor(
     @JsonProperty("beregnetInntekt")
     val beregnetInntekt: BigDecimal? = null,
 
+    /** Datoen inntekten er gjeldende for. Brukes også til å bestemme hvilke inntektsmåneder som ble foreslått i
+     * skjemaet (de tre foregående). Også kjent som skjæringstidspunkt. */
+    @JsonProperty("inntektsdato")
+    val inntektsdato: LocalDate? = null,
+
     /** Inneholder opplysninger om refusjon  */
     @JsonProperty("refusjon")
     val refusjon: Refusjon,
