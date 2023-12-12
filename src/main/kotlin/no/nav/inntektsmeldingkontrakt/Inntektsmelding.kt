@@ -136,6 +136,10 @@ data class Inntektsmelding @JsonCreator constructor(
     /** Systemet som har sendt inntektsmeldingen */
     @JsonProperty("avsenderSystem")
     val avsenderSystem: AvsenderSystem? = null,
+
+    /** Aarsak arbeidsgiver endrer foreslått inntekt */
+    @JsonProperty("inntektEndringAarsak")
+    val inntektEndringAarsak: InntektEndringAarsak? = null,
 )
 
 class PengeSerialiserer : JsonSerializer<BigDecimal>() {
