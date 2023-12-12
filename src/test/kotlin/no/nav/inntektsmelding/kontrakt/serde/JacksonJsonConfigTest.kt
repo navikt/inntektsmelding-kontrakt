@@ -3,6 +3,7 @@ package no.nav.inntektsmelding.kontrakt.serde
 import com.fasterxml.jackson.databind.ObjectMapper
 import no.nav.inntektsmeldingkontrakt.Arbeidsgivertype
 import no.nav.inntektsmeldingkontrakt.AvsenderSystem
+import no.nav.inntektsmeldingkontrakt.InntektEndringAarsak
 import no.nav.inntektsmeldingkontrakt.Inntektsmelding
 import no.nav.inntektsmeldingkontrakt.Periode
 import no.nav.inntektsmeldingkontrakt.Refusjon
@@ -75,6 +76,70 @@ class JacksonJsonConfigTest {
         skalInneholdeTekst(
             serialisertInntektsmelding,
             """"avsenderSystem":{"navn":"AltinnPortal","versjon":"1.0"}"""
+        )
+    }
+
+    @Test
+    fun skal_deserialisere_im_fra_nav_no() {
+        val inntektsmelding = Inntektsmelding(
+            inntektsmeldingId = "ENLANGIDENTIFIKATOR",
+            arbeidstakerFnr = "00000000000",
+            arbeidstakerAktorId = "00000000000",
+            refusjon = Refusjon(),
+            endringIRefusjoner = emptyList(),
+            opphoerAvNaturalytelser = emptyList(),
+            gjenopptakelseNaturalytelser = emptyList(),
+            status = Status.GYLDIG,
+            arbeidsgivertype = Arbeidsgivertype.VIRKSOMHET,
+            arbeidsgiverperioder = listOf(Periode(foersteJanuar, andreJanuar)),
+            beregnetInntekt = BigDecimal("249000.516"),
+            inntektsdato = LocalDate.of(2023, Month.OCTOBER, 13),
+            arkivreferanse = "AR123",
+            ferieperioder = emptyList(),
+            mottattDato = foersteJanuar.atStartOfDay(),
+            foersteFravaersdag = foersteJanuar,
+            naerRelasjon = true,
+            avsenderSystem = AvsenderSystem("NAV_NO", "1.0"),
+            innsenderFulltNavn = "Test Testesen",
+            innsenderTelefon = "12345678",
+            inntektEndringAarsak = InntektEndringAarsak(
+                aarsak = "TestAArsak",
+                perioder = listOf(Periode(foersteJanuar, andreJanuar)),
+                gjelderFra = foersteJanuar,
+                bleKjent = andreJanuar
+            )
+        )
+
+        val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
+        skalInneholdeTekst(
+            serialisertInntektsmelding,
+            """"fom":"2019-01-01""""
+        )
+        skalInneholdeTekst(
+            serialisertInntektsmelding,
+            """"beregnetInntekt":"249000.52""""
+        )
+        println(serialisertInntektsmelding)
+        skalInneholdeTekst(
+            serialisertInntektsmelding,
+            """"inntektsdato":"2023-10-13""""
+        )
+        println(serialisertInntektsmelding)
+
+        val deserialsertInntektsmelding =
+            objectMapper.readValue(serialisertInntektsmelding, Inntektsmelding::class.java)
+        assertEquals(
+            inntektsmelding.arbeidsgiverperioder.get(0),
+            deserialsertInntektsmelding.arbeidsgiverperioder.get(0)
+        )
+        assertEquals(BigDecimal("249000.52"), deserialsertInntektsmelding.beregnetInntekt)
+        skalInneholdeTekst(
+            serialisertInntektsmelding,
+            """"avsenderSystem":{"navn":"NAV_NO","versjon":"1.0"}"""
+        )
+        skalInneholdeTekst(
+            serialisertInntektsmelding,
+            """"inntektEndringAarsak":{"aarsak":"TestAArsak","perioder":[{"fom":"2019-01-01","tom":"2019-01-02"}],"gjelderFra":"2019-01-01","bleKjent":"2019-01-02"}"""
         )
     }
 
