@@ -124,7 +124,6 @@ class JacksonJsonConfigTest {
             serialisertInntektsmelding,
             """"inntektsdato":"2023-10-13""""
         )
-        println(serialisertInntektsmelding)
 
         val deserialsertInntektsmelding =
             objectMapper.readValue(serialisertInntektsmelding, Inntektsmelding::class.java)
