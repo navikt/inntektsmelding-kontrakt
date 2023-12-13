@@ -137,7 +137,7 @@ data class Inntektsmelding @JsonCreator constructor(
     @JsonProperty("avsenderSystem")
     val avsenderSystem: AvsenderSystem? = null,
 
-    /** Aarsak arbeidsgiver endrer foreslått inntekt */
+    /** Årsak til at arbeidsgiver endrer foreslått inntekt */
     @JsonProperty("inntektEndringAarsak")
     val inntektEndringAarsak: InntektEndringAarsak? = null,
 )
