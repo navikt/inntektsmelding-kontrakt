@@ -119,19 +119,10 @@ class JacksonJsonConfigTest {
             serialisertInntektsmelding,
             """"beregnetInntekt":"249000.52""""
         )
-        println(serialisertInntektsmelding)
         skalInneholdeTekst(
             serialisertInntektsmelding,
             """"inntektsdato":"2023-10-13""""
         )
-
-        val deserialsertInntektsmelding =
-            objectMapper.readValue(serialisertInntektsmelding, Inntektsmelding::class.java)
-        assertEquals(
-            inntektsmelding.arbeidsgiverperioder.get(0),
-            deserialsertInntektsmelding.arbeidsgiverperioder.get(0)
-        )
-        assertEquals(BigDecimal("249000.52"), deserialsertInntektsmelding.beregnetInntekt)
         skalInneholdeTekst(
             serialisertInntektsmelding,
             """"avsenderSystem":{"navn":"NAV_NO","versjon":"1.0"}"""
@@ -140,6 +131,14 @@ class JacksonJsonConfigTest {
             serialisertInntektsmelding,
             """"inntektEndringAarsak":{"aarsak":"TestAArsak","perioder":[{"fom":"2019-01-01","tom":"2019-01-02"}],"gjelderFra":"2019-01-01","bleKjent":"2019-01-02"}"""
         )
+        println(serialisertInntektsmelding)
+        val deserialsertInntektsmelding =
+            objectMapper.readValue(serialisertInntektsmelding, Inntektsmelding::class.java)
+        assertEquals(
+            inntektsmelding.arbeidsgiverperioder.get(0),
+            deserialsertInntektsmelding.arbeidsgiverperioder.get(0)
+        )
+        assertEquals(BigDecimal("249000.52"), deserialsertInntektsmelding.beregnetInntekt)
     }
 
     @Test
