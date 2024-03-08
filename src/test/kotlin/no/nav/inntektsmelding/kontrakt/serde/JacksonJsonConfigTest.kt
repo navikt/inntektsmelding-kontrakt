@@ -9,12 +9,14 @@ import no.nav.inntektsmeldingkontrakt.Periode
 import no.nav.inntektsmeldingkontrakt.Refusjon
 import no.nav.inntektsmeldingkontrakt.Status
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.time.LocalDate
 import java.time.Month
+import java.util.UUID
 
 class JacksonJsonConfigTest {
 
@@ -139,6 +141,15 @@ class JacksonJsonConfigTest {
             deserialsertInntektsmelding.arbeidsgiverperioder.get(0)
         )
         assertEquals(BigDecimal("249000.52"), deserialsertInntektsmelding.beregnetInntekt)
+        assertNull(inntektsmelding.vedtaksperiodeId)
+        assertNull(deserialsertInntektsmelding.vedtaksperiodeId)
+        val vedtaksperiodeId = UUID.randomUUID().toString()
+        val inntektsmeldingMedVedtaksperiode = inntektsmelding.copy(vedtaksperiodeId = vedtaksperiodeId)
+        val serialisert = objectMapper.writeValueAsString(inntektsmeldingMedVedtaksperiode)
+        skalInneholdeTekst(serialisert, vedtaksperiodeId.toString())
+        val deserialsert =
+            objectMapper.readValue(serialisert, Inntektsmelding::class.java)
+        assertEquals(vedtaksperiodeId, deserialsert.vedtaksperiodeId)
     }
 
     @Test
