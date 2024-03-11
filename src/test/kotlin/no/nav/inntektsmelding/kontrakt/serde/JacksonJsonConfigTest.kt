@@ -143,7 +143,7 @@ class JacksonJsonConfigTest {
         assertEquals(BigDecimal("249000.52"), deserialsertInntektsmelding.beregnetInntekt)
         assertNull(inntektsmelding.vedtaksperiodeId)
         assertNull(deserialsertInntektsmelding.vedtaksperiodeId)
-        val vedtaksperiodeId = UUID.randomUUID().toString()
+        val vedtaksperiodeId = UUID.randomUUID()
         val inntektsmeldingMedVedtaksperiode = inntektsmelding.copy(vedtaksperiodeId = vedtaksperiodeId)
         val serialisert = objectMapper.writeValueAsString(inntektsmeldingMedVedtaksperiode)
         skalInneholdeTekst(serialisert, vedtaksperiodeId.toString())

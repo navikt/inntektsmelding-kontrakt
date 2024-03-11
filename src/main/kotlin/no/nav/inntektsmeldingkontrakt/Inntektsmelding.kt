@@ -12,6 +12,7 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.util.UUID
 import javax.validation.constraints.Pattern
 
 data class Inntektsmelding @JsonCreator constructor(
@@ -22,7 +23,7 @@ data class Inntektsmelding @JsonCreator constructor(
 
     /** UUID - vedtaksperiodeID fra vedtaksløsningen - kan være null for selvbestemt / arbeidsgiverInitiert IM */
     @JsonProperty("vedtaksperiodeId")
-    val vedtaksperiodeId: String? = null,
+    val vedtaksperiodeId: UUID? = null,
 
     /** Arbeidstakers fødselsnummer/dnr  */
     @Pattern(regexp = "[0-9]{11}")
