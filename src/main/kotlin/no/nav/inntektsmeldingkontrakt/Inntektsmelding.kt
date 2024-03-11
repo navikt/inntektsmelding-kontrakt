@@ -20,6 +20,10 @@ data class Inntektsmelding @JsonCreator constructor(
     @JsonProperty("inntektsmeldingId")
     val inntektsmeldingId: String,
 
+    /** UUID - vedtaksperiodeID fra vedtaksløsningen - kan være null for selvbestemt / arbeidsgiverInitiert IM */
+    @JsonProperty("vedtaksperiodeId")
+    val vedtaksperiodeId: String? = null,
+
     /** Arbeidstakers fødselsnummer/dnr  */
     @Pattern(regexp = "[0-9]{11}")
     @JsonProperty("arbeidstakerFnr")
