@@ -25,7 +25,8 @@ data class Inntektsmelding @JsonCreator constructor(
     @JsonProperty("vedtaksperiodeId")
     val vedtaksperiodeId: UUID? = null,
 
-    /** Boolean - True dersom IM er svar på en forespørsel, eller om en selvbestemt / arbeidsgiverInitiert IM matcher en forespørsel eller en potensiell forespørsel fra Spleis.
+    /** Boolean - True dersom IM er svar på en forespørsel,
+     *  eller om en arbeidsgiverInitiert IM matcher en forespørsel eller potensiell forespørsel fra Spleis.
      *  Hvis satt til false kan Spleis ignorere denne IM, den vil da behandles i gosys / infotrygd
      * */
     @JsonProperty("matcherSpleis")
