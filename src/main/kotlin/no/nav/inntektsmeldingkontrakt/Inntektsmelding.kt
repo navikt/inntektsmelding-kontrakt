@@ -152,6 +152,11 @@ data class Inntektsmelding @JsonCreator constructor(
     /** Årsak til at arbeidsgiver endrer foreslått inntekt */
     @JsonProperty("inntektEndringAarsak")
     val inntektEndringAarsak: InntektEndringAarsak? = null,
+
+    /** Årsak for innsending (i praksis Ny eller Endring, men OBS; er definert som String i gammelt XML-format)
+     *  Setter derfor defaultverdi til Ny */
+    @JsonProperty("arsakTilInnsending")
+    val arsakTilInnsending: ArsakTilInnsending = ArsakTilInnsending.Ny,
 )
 
 class PengeSerialiserer : JsonSerializer<BigDecimal>() {
