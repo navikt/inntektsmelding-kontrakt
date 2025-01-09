@@ -1,7 +1,11 @@
 Inntektsmelding Kontrakt
 ================
 
-Intern kontrakt for inntektsmelding internt i sykepenger
+Intern kontrakt for inntektsmelding internt i sykepenger 
+- brukes som format fra spinosaurus og ut til konsumenter (Spleis, Flex og HAG-oppslag)
+- Spinosaurus oversetter innkommende Simba-format og XML-altinn-kontraktformat (nav-altinn-inntektsmelding/src/main/xsd/Inntektsmelding20181211.xsd)
+til no.nav.inntektsmeldingkontrakt og videresender dette på Aiven-topic til Spleis og Flex.
+- Dette formatet brukes også når HAG-bro gjør oppslag til Spinosaurus (henter / sjekker ekstern referanse)
 
 # Komme i gang
 
