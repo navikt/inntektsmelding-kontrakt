@@ -18,7 +18,7 @@ plugins {
     id("maven-publish")
 }
 
-val jacksonVersion = "2.13.1"
+val jacksonVersion = "2.16.1"
 
 dependencies {
     implementation(kotlin("stdlib"))
