@@ -150,8 +150,13 @@ data class Inntektsmelding @JsonCreator constructor(
     val avsenderSystem: AvsenderSystem? = null,
 
     /** Årsak til at arbeidsgiver endrer foreslått inntekt */
+    @Deprecated("benytt listen av inntektEndringAarsaker istedet", replaceWith = ReplaceWith("inntektEndringAarsaker"))
     @JsonProperty("inntektEndringAarsak")
     val inntektEndringAarsak: InntektEndringAarsak? = null,
+
+    /** Liste av årsaker til at arbeidsgiver endrer foreslått inntekt */
+    @JsonProperty("inntektEndringAarsaker")
+    val inntektEndringAarsaker: List<InntektEndringAarsak>? = null,
 
     /** Årsak for innsending (i praksis Ny eller Endring, men OBS; er definert som String i gammelt XML-format)
      *  Setter derfor defaultverdi til Ny */
