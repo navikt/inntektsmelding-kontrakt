@@ -109,7 +109,13 @@ class JacksonJsonConfigTest {
                 perioder = listOf(Periode(foersteJanuar, andreJanuar)),
                 gjelderFra = foersteJanuar,
                 bleKjent = andreJanuar
-            )
+            ),
+            inntektEndringAarsaker = listOf(InntektEndringAarsak(
+                aarsak = "TestAArsak",
+                perioder = listOf(Periode(foersteJanuar, andreJanuar)),
+                gjelderFra = foersteJanuar,
+                bleKjent = andreJanuar
+            ))
         )
 
         val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
@@ -132,6 +138,10 @@ class JacksonJsonConfigTest {
         skalInneholdeTekst(
             serialisertInntektsmelding,
             """"inntektEndringAarsak":{"aarsak":"TestAArsak","perioder":[{"fom":"2019-01-01","tom":"2019-01-02"}],"gjelderFra":"2019-01-01","bleKjent":"2019-01-02"}"""
+        )
+        skalInneholdeTekst(
+            serialisertInntektsmelding,
+            """"inntektEndringAarsaker":[{"aarsak":"TestAArsak","perioder":[{"fom":"2019-01-01","tom":"2019-01-02"}],"gjelderFra":"2019-01-01","bleKjent":"2019-01-02"}]"""
         )
         println(serialisertInntektsmelding)
         val deserialsertInntektsmelding =
