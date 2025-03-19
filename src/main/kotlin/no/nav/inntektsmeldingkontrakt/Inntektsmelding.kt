@@ -162,6 +162,9 @@ data class Inntektsmelding @JsonCreator constructor(
      *  Setter derfor defaultverdi til Ny */
     @JsonProperty("arsakTilInnsending")
     val arsakTilInnsending: ArsakTilInnsending = ArsakTilInnsending.Ny,
+
+    /** Hvilken mottakskanal nav har mottatt inntektsmeldingen fra feks NAV_NO eller ALTINN **/
+    val mottaksKanal: MottaksKanal? = null,
 )
 
 class PengeSerialiserer : JsonSerializer<BigDecimal>() {
