@@ -5,6 +5,7 @@ import no.nav.inntektsmeldingkontrakt.Arbeidsgivertype
 import no.nav.inntektsmeldingkontrakt.AvsenderSystem
 import no.nav.inntektsmeldingkontrakt.InntektEndringAarsak
 import no.nav.inntektsmeldingkontrakt.Inntektsmelding
+import no.nav.inntektsmeldingkontrakt.MottaksKanal
 import no.nav.inntektsmeldingkontrakt.Periode
 import no.nav.inntektsmeldingkontrakt.Refusjon
 import no.nav.inntektsmeldingkontrakt.Status
@@ -115,7 +116,8 @@ class JacksonJsonConfigTest {
                 perioder = listOf(Periode(foersteJanuar, andreJanuar)),
                 gjelderFra = foersteJanuar,
                 bleKjent = andreJanuar
-            ))
+            )),
+            mottaksKanal = MottaksKanal.NAV_NO
         )
 
         val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
@@ -142,6 +144,10 @@ class JacksonJsonConfigTest {
         skalInneholdeTekst(
             serialisertInntektsmelding,
             """"inntektEndringAarsaker":[{"aarsak":"TestAArsak","perioder":[{"fom":"2019-01-01","tom":"2019-01-02"}],"gjelderFra":"2019-01-01","bleKjent":"2019-01-02"}]"""
+        )
+        skalInneholdeTekst(
+            serialisertInntektsmelding,
+            """"mottaksKanal":"NAV_NO""""
         )
         println(serialisertInntektsmelding)
         val deserialsertInntektsmelding =
@@ -197,7 +203,8 @@ class JacksonJsonConfigTest {
             innsenderFulltNavn = innsenderFulltNavn,
             innsenderTelefon = innsenderTelefon,
             begrunnelseForReduksjonEllerIkkeUtbetalt = begrunnelseForReduksjonEllerIkkeUtbetalt,
-            bruttoUtbetalt = bruttoUtbetalt
+            bruttoUtbetalt = bruttoUtbetalt,
+            mottaksKanal = MottaksKanal.NAV_NO
         )
 
         val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
@@ -212,6 +219,7 @@ class JacksonJsonConfigTest {
         assertEquals(innsenderTelefon, deserialsertInntektsmelding.innsenderTelefon)
         assertEquals(begrunnelseForReduksjonEllerIkkeUtbetalt, deserialsertInntektsmelding.begrunnelseForReduksjonEllerIkkeUtbetalt)
         assertEquals(bruttoUtbetalt.setScale(2, RoundingMode.HALF_UP), deserialsertInntektsmelding.bruttoUtbetalt)
+        assertEquals(MottaksKanal.NAV_NO, deserialsertInntektsmelding.mottaksKanal)
     }
 
     private fun skalInneholdeTekst(serialisertInntektsmelding: String, tekst: String) {
