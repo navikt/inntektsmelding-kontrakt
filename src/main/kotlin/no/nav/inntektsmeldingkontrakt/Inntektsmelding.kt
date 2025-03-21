@@ -164,6 +164,7 @@ data class Inntektsmelding @JsonCreator constructor(
     val arsakTilInnsending: ArsakTilInnsending = ArsakTilInnsending.Ny,
 
     /** Hvilken mottakskanal nav har mottatt inntektsmeldingen fra feks NAV_NO eller ALTINN **/
+    @JsonProperty("mottaksKanal")
     val mottaksKanal: MottaksKanal? = null,
 )
 
