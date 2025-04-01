@@ -3,6 +3,7 @@ package no.nav.inntektsmelding.kontrakt.serde
 import com.fasterxml.jackson.databind.ObjectMapper
 import no.nav.inntektsmeldingkontrakt.Arbeidsgivertype
 import no.nav.inntektsmeldingkontrakt.AvsenderSystem
+import no.nav.inntektsmeldingkontrakt.Format
 import no.nav.inntektsmeldingkontrakt.InntektEndringAarsak
 import no.nav.inntektsmeldingkontrakt.Inntektsmelding
 import no.nav.inntektsmeldingkontrakt.MottaksKanal
@@ -10,6 +11,7 @@ import no.nav.inntektsmeldingkontrakt.Periode
 import no.nav.inntektsmeldingkontrakt.Refusjon
 import no.nav.inntektsmeldingkontrakt.Status
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -117,7 +119,9 @@ class JacksonJsonConfigTest {
                 gjelderFra = foersteJanuar,
                 bleKjent = andreJanuar
             )),
-            mottaksKanal = MottaksKanal.NAV_NO
+            mottaksKanal = MottaksKanal.NAV_NO,
+            format = Format.Arbeidsgiveropplysninger,
+            forespurt = true,
         )
 
         val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
@@ -149,6 +153,15 @@ class JacksonJsonConfigTest {
             serialisertInntektsmelding,
             """"mottaksKanal":"NAV_NO""""
         )
+        skalInneholdeTekst(
+            serialisertInntektsmelding,
+            """"format":"Arbeidsgiveropplysninger""""
+        )
+        skalInneholdeTekst(
+            serialisertInntektsmelding,
+            """"forespurt":"true""""
+        )
+
         println(serialisertInntektsmelding)
         val deserialsertInntektsmelding =
             objectMapper.readValue(serialisertInntektsmelding, Inntektsmelding::class.java)
@@ -204,8 +217,9 @@ class JacksonJsonConfigTest {
             innsenderTelefon = innsenderTelefon,
             begrunnelseForReduksjonEllerIkkeUtbetalt = begrunnelseForReduksjonEllerIkkeUtbetalt,
             bruttoUtbetalt = bruttoUtbetalt,
-            mottaksKanal = MottaksKanal.NAV_NO
-        )
+            mottaksKanal = MottaksKanal.NAV_NO,
+            format = Format.Arbeidsgiveropplysninger,
+            )
 
         val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
 
@@ -220,6 +234,8 @@ class JacksonJsonConfigTest {
         assertEquals(begrunnelseForReduksjonEllerIkkeUtbetalt, deserialsertInntektsmelding.begrunnelseForReduksjonEllerIkkeUtbetalt)
         assertEquals(bruttoUtbetalt.setScale(2, RoundingMode.HALF_UP), deserialsertInntektsmelding.bruttoUtbetalt)
         assertEquals(MottaksKanal.NAV_NO, deserialsertInntektsmelding.mottaksKanal)
+        assertEquals(Format.Arbeidsgiveropplysninger, deserialsertInntektsmelding.format)
+        assertFalse(deserialsertInntektsmelding.forespurt)
     }
 
     private fun skalInneholdeTekst(serialisertInntektsmelding: String, tekst: String) {
