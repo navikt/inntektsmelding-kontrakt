@@ -166,6 +166,14 @@ data class Inntektsmelding @JsonCreator constructor(
     /** Hvilken mottakskanal nav har mottatt inntektsmeldingen fra feks NAV_NO eller ALTINN **/
     @JsonProperty("mottaksKanal")
     val mottaksKanal: MottaksKanal? = null,
+
+    /** Hvilken type inntektsmelding det er snakk om hvis gammelt format (Fra Altinn med xml kontrakt) Inntektsmelding hvis nytt format (Simba / domene modell json kontrakt) Arbeidsgiveropplysninger */
+    @JsonProperty("format")
+    val format: Format? = null,
+
+    /** Hvorvidt inntektsmeldingen er forespurt eller selvbestemt. Hvis forespurt true ellers false */
+    @JsonProperty("forespurt")
+    val forespurt: Boolean = false
 )
 
 class PengeSerialiserer : JsonSerializer<BigDecimal>() {
