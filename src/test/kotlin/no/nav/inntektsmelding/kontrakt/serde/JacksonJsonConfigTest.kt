@@ -82,6 +82,10 @@ class JacksonJsonConfigTest {
             serialisertInntektsmelding,
             """"avsenderSystem":{"navn":"AltinnPortal","versjon":"1.0"}"""
         )
+        skalInneholdeTekst(
+            serialisertInntektsmelding,
+            """"forespurt":false"""
+        )
     }
 
     @Test
@@ -113,12 +117,14 @@ class JacksonJsonConfigTest {
                 gjelderFra = foersteJanuar,
                 bleKjent = andreJanuar
             ),
-            inntektEndringAarsaker = listOf(InntektEndringAarsak(
-                aarsak = "TestAArsak",
-                perioder = listOf(Periode(foersteJanuar, andreJanuar)),
-                gjelderFra = foersteJanuar,
-                bleKjent = andreJanuar
-            )),
+            inntektEndringAarsaker = listOf(
+                InntektEndringAarsak(
+                    aarsak = "TestAArsak",
+                    perioder = listOf(Periode(foersteJanuar, andreJanuar)),
+                    gjelderFra = foersteJanuar,
+                    bleKjent = andreJanuar
+                )
+            ),
             mottaksKanal = MottaksKanal.NAV_NO,
             format = Format.Arbeidsgiveropplysninger,
             forespurt = true,
@@ -159,7 +165,11 @@ class JacksonJsonConfigTest {
         )
         skalInneholdeTekst(
             serialisertInntektsmelding,
-            """"forespurt":"true""""
+            """"naerRelasjon":true"""
+        )
+        skalInneholdeTekst(
+            serialisertInntektsmelding,
+            """"forespurt":true"""
         )
 
         println(serialisertInntektsmelding)
@@ -219,7 +229,7 @@ class JacksonJsonConfigTest {
             bruttoUtbetalt = bruttoUtbetalt,
             mottaksKanal = MottaksKanal.NAV_NO,
             format = Format.Arbeidsgiveropplysninger,
-            )
+        )
 
         val serialisertInntektsmelding = objectMapper.writeValueAsString(inntektsmelding)
 
@@ -231,7 +241,10 @@ class JacksonJsonConfigTest {
         assertEquals(foersteJanuar, deserialsertInntektsmelding.ferieperioder[0].tom)
         assertEquals(innsenderFulltNavn, deserialsertInntektsmelding.innsenderFulltNavn)
         assertEquals(innsenderTelefon, deserialsertInntektsmelding.innsenderTelefon)
-        assertEquals(begrunnelseForReduksjonEllerIkkeUtbetalt, deserialsertInntektsmelding.begrunnelseForReduksjonEllerIkkeUtbetalt)
+        assertEquals(
+            begrunnelseForReduksjonEllerIkkeUtbetalt,
+            deserialsertInntektsmelding.begrunnelseForReduksjonEllerIkkeUtbetalt
+        )
         assertEquals(bruttoUtbetalt.setScale(2, RoundingMode.HALF_UP), deserialsertInntektsmelding.bruttoUtbetalt)
         assertEquals(MottaksKanal.NAV_NO, deserialsertInntektsmelding.mottaksKanal)
         assertEquals(Format.Arbeidsgiveropplysninger, deserialsertInntektsmelding.format)
