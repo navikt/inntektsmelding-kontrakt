@@ -167,7 +167,7 @@ data class Inntektsmelding @JsonCreator constructor(
     @JsonProperty("mottaksKanal")
     val mottaksKanal: MottaksKanal? = null,
 
-    /** Hvilken type inntektsmelding det er snakk om hvis gammelt format Inntektsmelding hvis nytt format Arbeidsgiveropplysninger */
+    /** Hvilken type inntektsmelding det er snakk om hvis gammelt format (Fra Altinn med xml kontrakt) Inntektsmelding hvis nytt format (Simba / domene modell json kontrakt) Arbeidsgiveropplysninger */
     @JsonProperty("format")
     val format: Format? = null,
 
