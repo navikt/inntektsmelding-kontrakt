@@ -15,8 +15,18 @@ version = "${dateFormat.format(Date())}-$gitHash"
 plugins {
     kotlin("jvm") version "1.6.0"
     java
+    id("org.sonarqube") version "2.8"
     id("maven-publish")
-}
+ }
+
+ sonarqube {
+     properties {
+         property("sonar.projectKey", "navikt_inntektsmelding-kontrakt")
+         property("sonar.organization", "navikt")
+         property("sonar.host.url", "https://sonarcloud.io")
+         property("sonar.login", System.getenv("SONAR_TOKEN"))
+     }
+ }
 
 val jacksonVersion = "2.16.1"
 
