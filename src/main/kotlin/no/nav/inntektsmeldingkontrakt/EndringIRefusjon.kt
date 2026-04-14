@@ -1,13 +1,12 @@
 package no.nav.inntektsmeldingkontrakt
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import java.math.BigDecimal
 import java.time.LocalDate
 
-data class EndringIRefusjon @JsonCreator constructor(
+data class EndringIRefusjon(
 
     /** Dersom arbeidsgiver krever refusjon og refusjonsbeløpet er lavere enn den beregnede månedsinntekten, skal
      * arbeidsgiver opplyse beløpet per måned samt en fra og med dato refusjonsbeløpet gjelder fra. Dette og feltet

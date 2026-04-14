@@ -18,7 +18,7 @@ class JacksonJsonConfig {
             objectMapper.registerModule(JavaTimeModule())
             objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-            objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+            objectMapper.setDefaultPropertyInclusion(JsonInclude.Include.NON_NULL)
             return objectMapper
         }
     }

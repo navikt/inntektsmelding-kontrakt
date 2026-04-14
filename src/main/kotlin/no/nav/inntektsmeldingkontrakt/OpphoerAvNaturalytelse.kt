@@ -1,13 +1,12 @@
 package no.nav.inntektsmeldingkontrakt
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import java.math.BigDecimal
 import java.time.LocalDate
 
-data class OpphoerAvNaturalytelse @JsonCreator constructor(
+data class OpphoerAvNaturalytelse(
 
         /** Type Naturalytelse som faller bort i stønadsperioden og som ikke blir erstattet skal meldes inn.  */
         @JsonProperty("naturalytelse")
