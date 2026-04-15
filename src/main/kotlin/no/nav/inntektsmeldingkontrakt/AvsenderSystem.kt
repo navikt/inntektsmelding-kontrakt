@@ -1,9 +1,8 @@
 package no.nav.inntektsmeldingkontrakt
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class AvsenderSystem @JsonCreator constructor(
+data class AvsenderSystem(
     @JsonProperty("navn")
     val navn: String? = null,
     @JsonProperty("versjon")

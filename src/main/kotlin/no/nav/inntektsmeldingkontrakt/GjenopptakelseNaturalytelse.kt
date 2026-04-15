@@ -1,13 +1,12 @@
 package no.nav.inntektsmeldingkontrakt
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import java.math.BigDecimal
 import java.time.LocalDate
 
-data class GjenopptakelseNaturalytelse @JsonCreator constructor(
+data class GjenopptakelseNaturalytelse(
 
         /** Hvis arbeidstaker igjen skulle motta naturalytelsen så skal det oppgis hvilken naturalytelse dette gjelder.  */
         @JsonProperty("naturalYtelse")
