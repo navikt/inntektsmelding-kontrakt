@@ -166,7 +166,11 @@ data class Inntektsmelding @JsonCreator constructor(
 
     /** Hvorvidt inntektsmeldingen er forespurt eller selvbestemt. Hvis forespurt true ellers false */
     @JsonProperty("forespurt")
-    val forespurt: Boolean = false
+    val forespurt: Boolean = false,
+
+    /** Hvorvidt inntektsmeldingen inneholder flere arbeidsforhold */
+    @JsonProperty("harFlereArbeidsforhold")
+    val harFlereArbeidsforhold: Boolean = false
 )
 
 class PengeSerialiserer : JsonSerializer<BigDecimal>() {
