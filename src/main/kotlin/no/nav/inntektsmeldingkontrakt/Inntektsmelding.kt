@@ -170,8 +170,12 @@ data class Inntektsmelding @JsonCreator constructor(
 
     /** Hvorvidt inntektsmeldingen inneholder flere arbeidsforhold */
     @JsonProperty("harFlereArbeidsforhold")
-    val harFlereArbeidsforhold: Boolean = false
-)
+    val harFlereArbeidsforhold: Boolean = false,
+
+) {
+    @get:JsonProperty("refusjonskravGyldigFra")
+    val refusjonskravGyldigFra: LocalDate? get() = mottattDato.toLocalDate().minusMonths(3)?.withDayOfMonth(1)
+}
 
 class PengeSerialiserer : JsonSerializer<BigDecimal>() {
     @Throws(IOException::class, JsonProcessingException::class)

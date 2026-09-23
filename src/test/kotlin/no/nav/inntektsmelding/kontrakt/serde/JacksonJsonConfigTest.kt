@@ -86,6 +86,35 @@ class JacksonJsonConfigTest {
             serialisertInntektsmelding,
             """"forespurt":false"""
         )
+        skalInneholdeTekst(
+            serialisertInntektsmelding,
+            """"refusjonskravGyldigFra":"2018-10-01""""
+        )
+    }
+
+    @Test
+    fun refusjonskravGyldigFra_beregnes_som_foerste_dag_tre_maaneder_foer_mottattDato() {
+        val inntektsmelding = Inntektsmelding(
+            inntektsmeldingId = "ENLANGIDENTIFIKATOR",
+            arbeidstakerFnr = "00000000000",
+            arbeidstakerAktorId = "00000000000",
+            refusjon = Refusjon(),
+            endringIRefusjoner = emptyList(),
+            opphoerAvNaturalytelser = emptyList(),
+            gjenopptakelseNaturalytelser = emptyList(),
+            status = Status.GYLDIG,
+            arbeidsgivertype = Arbeidsgivertype.VIRKSOMHET,
+            arbeidsgiverperioder = listOf(Periode(foersteJanuar, andreJanuar)),
+            arkivreferanse = "AR123",
+            ferieperioder = emptyList(),
+            mottattDato = LocalDate.of(2019, Month.MAY, 17).atStartOfDay(),
+            foersteFravaersdag = foersteJanuar,
+            naerRelasjon = true,
+            innsenderFulltNavn = "",
+            innsenderTelefon = ""
+        )
+
+        assertEquals(LocalDate.of(2019, Month.FEBRUARY, 1), inntektsmelding.refusjonskravGyldigFra)
     }
 
     @Test

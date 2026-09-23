@@ -2,6 +2,7 @@ import java.text.SimpleDateFormat
 import java.time.ZoneId
 import java.util.Date
 import java.util.TimeZone
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 val dateFormat = SimpleDateFormat("yyyy.MM.dd-hh-mm")
@@ -13,7 +14,7 @@ group = "no.nav.sykepenger.kontrakter"
 version = "${dateFormat.format(Date())}-$gitHash"
 
 plugins {
-    kotlin("jvm") version "1.6.0"
+    kotlin("jvm") version "1.9.25"
     java
     id("maven-publish")
 }
@@ -36,19 +37,29 @@ dependencies {
 
 repositories {
     mavenCentral()
+    mavenNav("*")
+
 }
 
-configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_1_8
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
+tasks.withType<KotlinCompile>().configureEach {
+    kotlinOptions.jvmTarget = "21"
 }
 
 configure<PublishingExtension> {
+    val githubPassword: String by project
+
     repositories {
         maven {
             url = uri("https://maven.pkg.github.com/navikt/inntektsmelding-kontrakt")
             credentials {
-                username = System.getenv("GITHUB_USERNAME")
-                password = System.getenv("GITHUB_PASSWORD")
+                username = "x-access-token"
+                password = githubPassword
             }
         }
     }
@@ -83,4 +94,17 @@ tasks.named<Test>("test") {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+
+fun RepositoryHandler.mavenNav(repo: String): MavenArtifactRepository {
+    val githubPassword: String by project
+
+    return maven {
+        setUrl("https://maven.pkg.github.com/navikt/$repo")
+        credentials {
+            username = "x-access-token"
+            password = githubPassword
+        }
+    }
 }
