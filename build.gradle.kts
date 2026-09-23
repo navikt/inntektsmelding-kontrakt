@@ -37,6 +37,8 @@ dependencies {
 
 repositories {
     mavenCentral()
+    mavenNav("*")
+
 }
 
 java {
@@ -50,12 +52,14 @@ tasks.withType<KotlinCompile>().configureEach {
 }
 
 configure<PublishingExtension> {
+    val githubPassword: String by project
+
     repositories {
         maven {
             url = uri("https://maven.pkg.github.com/navikt/inntektsmelding-kontrakt")
             credentials {
-                username = System.getenv("GITHUB_USERNAME")
-                password = System.getenv("GITHUB_PASSWORD")
+                username = "x-access-token"
+                password = githubPassword
             }
         }
     }
@@ -90,4 +94,17 @@ tasks.named<Test>("test") {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+
+fun RepositoryHandler.mavenNav(repo: String): MavenArtifactRepository {
+    val githubPassword: String by project
+
+    return maven {
+        setUrl("https://maven.pkg.github.com/navikt/$repo")
+        credentials {
+            username = "x-access-token"
+            password = githubPassword
+        }
+    }
 }
