@@ -111,12 +111,6 @@ class JacksonJsonConfigTest {
             avsenderSystem = AvsenderSystem("NAV_NO", "1.0"),
             innsenderFulltNavn = "Test Testesen",
             innsenderTelefon = "12345678",
-            inntektEndringAarsak = InntektEndringAarsak(
-                aarsak = "TestAArsak",
-                perioder = listOf(Periode(foersteJanuar, andreJanuar)),
-                gjelderFra = foersteJanuar,
-                bleKjent = andreJanuar
-            ),
             inntektEndringAarsaker = listOf(
                 InntektEndringAarsak(
                     aarsak = "TestAArsak",
@@ -146,10 +140,6 @@ class JacksonJsonConfigTest {
         skalInneholdeTekst(
             serialisertInntektsmelding,
             """"avsenderSystem":{"navn":"NAV_NO","versjon":"1.0"}"""
-        )
-        skalInneholdeTekst(
-            serialisertInntektsmelding,
-            """"inntektEndringAarsak":{"aarsak":"TestAArsak","perioder":[{"fom":"2019-01-01","tom":"2019-01-02"}],"gjelderFra":"2019-01-01","bleKjent":"2019-01-02"}"""
         )
         skalInneholdeTekst(
             serialisertInntektsmelding,
