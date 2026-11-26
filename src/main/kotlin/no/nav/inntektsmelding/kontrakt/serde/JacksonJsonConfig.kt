@@ -7,10 +7,7 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 
-
 class JacksonJsonConfig {
-
-
     companion object objectMapperFactory {
         fun opprettObjectMapper(): ObjectMapper {
             val objectMapper = ObjectMapper()
@@ -22,7 +19,4 @@ class JacksonJsonConfig {
             return objectMapper
         }
     }
-
 }
-
-
